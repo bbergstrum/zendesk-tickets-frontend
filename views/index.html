@@ -31,21 +31,34 @@
 				</div>
 			</div><!-- /.container-fluid -->
 		</nav>
-		<!-- Ticket List -->
-		<table class="table table-hover ">
-			<thead>
-			  <tr>
-				<th scope="col">#</th>
-				<th scope="col">Subject</th>
-				<th scope="col">Status</th>
-				<th scope="col">Priority</th>
-			  </tr>
-			</thead>
-			<tbody id="ticket-list">
-			</tbody>
-		  </table>
+		<div id="selected-ticket" class="container" style="display: none;">
+				<!-- Show Ticket Display -->
+				<h4 id="selected-ticket-subject"></h4>
+				<hr>
+				<p id="selected-ticket-desc"></p>
+				<span id="selected-ticket-priority"></span>
+				<button id="back" class="btn btn-primary">Back</button>
+			</div >
+	
+					<div id="ticket-table" class="container" style="display: block;">
+				<!-- populate data here -->
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Subject</th>
+							<th scope="col">Status</th>
+							<th scope="col">Priority</th>
+						</tr>
+					</thead>
+					<tbody id="tickets-list">
+						<!-- List populated here -->
+					</tbody>
+				</table>
+					</div>
+		
 		<!-- Pagination -->
-		<nav aria-label="Page navigation bottom" class="justify-content-center">
+		<nav aria-label="Page navigation bottom" id="pages">
 			<ul id="pagination" class="pagination justify-content-center">
 			  <li class="page-item disabled">
 				<a class="page-link" href="#" tabindex="-1">Previous</a>
