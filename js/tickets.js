@@ -22,7 +22,6 @@ function buildTicketList(selectedPageId){
     });
 };
 
-
 function buildRow(ticket){
     //apply ticket ID attribute to each row respectively
     return  '<tr class="table-row" data-ticket-id=' + ticket.id + '>' +
@@ -42,6 +41,7 @@ function showTicket(clickedTicket){
     // grab ticketId from selected ticket element
     $.getJSON(showTicketUrl + $(clickedTicket).parent().attr('data-ticket-id')) 
     .done(function(ticket){
+        $('#selected-ticket-id').text('Ticket ID: ' + ticket.id);
         $('#selected-ticket-subject').text(ticket.subject);
         $('#selected-ticket-desc').text(ticket.description);
         $('#selected-ticket-priority').text(ticket.priority);
@@ -51,7 +51,7 @@ function showTicket(clickedTicket){
 
 //  Event Listeners
 
-$('#back').click(function (){
+$('.back').click(function (){
     //update displays
     $("#selected-ticket").hide();
     $("#ticket-table").show();
