@@ -5,6 +5,7 @@ function buildTicketList(selectedPageId){
     // grab JSON from backend
     $.getJSON(url)
     .done(function(ticketList){
+        $('#tickets-list').empty();
         ticketList.forEach(ticket => {
             //iterate through data and build ticket list
             $('#tickets-list').append(
