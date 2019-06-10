@@ -22,11 +22,18 @@ function buildTicketList(selectedPageId) {
             });
         })
         .fail(function (jqXHR, textStatus) {
-            console.log('getJSON request failed: ' + textStatus);
-            console.log(jqXHR);
-            $('#tickets-list').append(
-                buildTicketError()
-            );
+            $('#ticket-list').empty();
+            if(jqXHR.status === 400){
+                //handle error if Zendesk API unavailable
+                $('#tickets-list').append(
+                    buildApiError('Zendesk API Unavailable')
+                );
+            } else {
+                //handle error if backend client is unavailable
+                $('#tickets-list').append(
+                    buildTicketError()
+                );
+            }
         });
 };
 
@@ -41,14 +48,18 @@ function buildRow(ticket) {
         '</tr>';
 };
 
+// Error Handling 
 function buildTicketError() {
     return '<tr>' +
         '<td></td>' +
-        '<td>Connection to ticket viewer backend unavailable.</td>' +
-        '</tr>' +
-        '<tr>' +
+        '<td>Error: connection to backend client unavailable.</td>' +
+        '</tr>' 
+};
+
+function buildApiError(error) {
+    return '<tr>' +
         '<td></td>' +
-        '<td>Unable to fetch tickets...</td>' +
+        '<td>Error: ' + error + '.</td>' +
         '</tr>'
 };
 
