@@ -1,9 +1,8 @@
+/* Global */
 body {
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
-    background: #DCE35B;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #45B649, #DCE35B);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #45B649, #DCE35B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: url('../assets/background-01-upsplash.jpg')
 }
 
 /* navigation */
@@ -18,13 +17,6 @@ body {
     font-weight: bold;
     display: inline-block;
     padding-left: 28px;
-}
-
-/* pagination */
-#pages {
-    display: flex;
-    justify-content: center;
-
 }
 
 /* tickets table */
@@ -43,6 +35,7 @@ body {
     justify-content: center;
     border-radius: 5px;
 }
+
 /* selected ticket */
 #selected-ticket div {
     background-color: #f8f8f8;
@@ -62,5 +55,12 @@ body {
 #selected-ticket div button {
     margin-left: auto;
     float: right;
+}
+
+/* pagination */
+#pages {
+    display: flex;
+    justify-content: center;
+
 }
 
