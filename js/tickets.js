@@ -1,7 +1,7 @@
 //  Tickets List Logic
 
 function buildTicketList(selectedPageId) {
-    const url = 'http://ec2-13-210-131-209.ap-southeast-2.compute.amazonaws.com/ticketsByPage/' + selectedPageId;
+    const url = 'http://ec2-13-210-131-209.ap-southeast-2.compute.amazonaws.com:3000/ticketsByPage/' + selectedPageId;
     // grab JSON from backend
     $.getJSON(url)
         .done(function (ticketList) {
@@ -67,7 +67,7 @@ function buildApiError(error) {
 
 function showTicket(clickedTicket) {
     //request selected ticket data from backend
-    const showTicketUrl = 'http://ec2-13-210-131-209.ap-southeast-2.compute.amazonaws.com/ticket/';
+    const showTicketUrl = 'http://ec2-13-210-131-209.ap-southeast-2.compute.amazonaws.com:3000/ticket/';
     // grab ticketId from selected ticket element
     $.getJSON(showTicketUrl + $(clickedTicket).parent().attr('data-ticket-id'))
         .done(function (ticket) {
