@@ -1,7 +1,7 @@
 //  Tickets List Logic
 
 function buildTicketList(selectedPageId) {
-    var url = 'http://localhost:3000/ticketsByPage/' + selectedPageId;
+    const url = 'http://ec2-13-210-131-209.ap-southeast-2.compute.amazonaws.com/ticketsByPage/' + selectedPageId;
     // grab JSON from backend
     $.getJSON(url)
         .done(function (ticketList) {
@@ -53,21 +53,21 @@ function buildTicketError() {
     return '<tr>' +
         '<td></td>' +
         '<td>Error: connection to backend client unavailable.</td>' +
-        '</tr>' 
+        '</tr>';
 };
 
 function buildApiError(error) {
     return '<tr>' +
         '<td></td>' +
         '<td>Error: ' + error + '.</td>' +
-        '</tr>'
+        '</tr>';
 };
 
 //  Single Ticket Logic
 
 function showTicket(clickedTicket) {
     //request selected ticket data from backend
-    const showTicketUrl = 'http://localhost:3000/ticket/';
+    const showTicketUrl = 'http://ec2-13-210-131-209.ap-southeast-2.compute.amazonaws.com/ticket/';
     // grab ticketId from selected ticket element
     $.getJSON(showTicketUrl + $(clickedTicket).parent().attr('data-ticket-id'))
         .done(function (ticket) {
