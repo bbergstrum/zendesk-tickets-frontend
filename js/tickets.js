@@ -1,9 +1,12 @@
 //  Tickets List Logic
+const apiUrl = 'http://ec2-13-210-131-209.ap-southeast-2.compute.amazonaws.com:3000/';
+const ticketsByPageUrl = apiUrl + 'ticketsByPage/';
+const showTicketUrl = apiUrl + 'ticket/';
+const totalTicketsUrl = apiUrl + 'tickets/total';
 
 function buildTicketList(selectedPageId) {
-    const url = 'http://ec2-13-210-131-209.ap-southeast-2.compute.amazonaws.com:3000/ticketsByPage/' + selectedPageId;
     // grab JSON from backend
-    $.getJSON(url)
+    $.getJSON(ticketsByPageUrl + selectedPageId)
         .done(function (ticketList) {
             $('#tickets-list').empty();
             ticketList.forEach(ticket => {
@@ -48,7 +51,7 @@ function buildRow(ticket) {
         '</tr>';
 };
 
-// Error Handling 
+// Error Handling
 function buildTicketError() {
     return '<tr>' +
         '<td></td>' +
@@ -63,12 +66,10 @@ function buildApiError(error) {
         '</tr>';
 };
 
-//  Single Ticket Logic
-
+// Single Ticket Logic
 function showTicket(clickedTicket) {
-    //request selected ticket data from backend
-    const showTicketUrl = 'http://ec2-13-210-131-209.ap-southeast-2.compute.amazonaws.com:3000/ticket/';
-    // grab ticketId from selected ticket element
+    // request selected ticket data from backend
+    // and grab ticketId from selected ticket element
     $.getJSON(showTicketUrl + $(clickedTicket).parent().attr('data-ticket-id'))
         .done(function (ticket) {
             $('#selected-ticket-id').text('Ticket ID: ' + ticket.id);
@@ -79,8 +80,7 @@ function showTicket(clickedTicket) {
         });
 };
 
-//  Event Listeners
-
+// Event Listeners
 $('.back').click(function () {
     //update displays
     $("#selected-ticket").hide();
@@ -88,12 +88,19 @@ $('.back').click(function () {
     $('#pages').show();
 });
 
-//  Pagination Logic 
+// Pagination Logic
+function renderPagination() {
+    $.getJSON(totalTicketsUrl)
+    .done(function (res) {
+        const totalPages = res.totalTickets / 25;
+        $('#pagination').twbsPagination({
+            totalPages: totalPages,
+            visiblePages: totalPages,
+            onPageClick: function (event, page) {
+                buildTicketList(page);
+            }
+        });
+    });
+}
 
-$('#pagination').twbsPagination({
-    totalPages: 4,
-    visiblePages: 4,
-    onPageClick: function (event, page) {
-        buildTicketList(page);
-    }
-});
+renderPagination();
